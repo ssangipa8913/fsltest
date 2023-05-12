@@ -22,3 +22,13 @@ jobs:
     - run: npm run prettier
     - run: CI=true npm run test
     - run: npm run build
+
+    - name: Docker ECR
+      uses: appleboy/docker-ecr-action@v0.0.3
+      with:
+        access_key: ${{ secrets.access_key }}
+        secret_key: ${{ secrets.secret_key }}
+        registry: ${{ secrets.registry }}
+        region: us-west-2
+        repo: fsltest
+        tags: latest

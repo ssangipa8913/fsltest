@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fsltest
+  name: fsltest
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fsltest
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fsltest
+    spec:
+      containers:
+      - image: fsltest:latest
+        name: fsltest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: fsltest
+        resources: {}
+status: {}
